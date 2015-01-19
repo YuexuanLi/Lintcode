@@ -1,0 +1,27 @@
+public class Solution {
+    /**
+     * @param nums: The rotated sorted array
+     * @return: The recovered sorted array
+     */
+     //三部翻转法
+    //  [4,5][1,2,3]
+    //  [5,4][3,2,1]
+    //  [1,2,3,4,5]
+    public void recoverRotatedSortedArray(ArrayList<Integer> nums) {
+        for (int i = 0; i < nums.size() - 1; i++) {
+            if (nums.get(i) > nums.get(i + 1)) {
+                recover(nums, 0, i);
+                recover(nums, i + 1, nums.size() - 1);
+                recover(nums, 0, nums.size() - 1);
+                return;
+            }
+        }
+    }
+    public void recover(ArrayList<Integer> nums, int start, int end) {
+        for (int i = start, j = end; i < j; i++, j--) {
+            int temp = nums.get(i);
+            nums.set(i, nums.get(j));
+            nums.set(j, temp);
+        }
+    }
+}
